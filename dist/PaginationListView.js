@@ -16,7 +16,9 @@ var PaginationListView = React.createClass({
         return React.createElement(PageView, {
           onClick: this.props.onPageSelected.bind(null, page),
           selected: this.props.selected === page,
+          linkContainerClassName: this.props.linkContainerClassName,
           activeClass: this.props.activeClass,
+          link: this.props.link,
           page: page + 1 });
       }).bind(this));
 
@@ -46,7 +48,9 @@ var PaginationListView = React.createClass({
         var pageView = React.createElement(PageView, {
           onClick: this.props.onPageSelected.bind(null, index),
           selected: this.props.selected === index,
+          linkContainerClassName: this.props.linkContainerClassName,
           activeClass: this.props.activeClass,
+          link: this.props.link,
           page: index + 1 });
 
         if (page <= this.props.marginPagesDisplayed) {

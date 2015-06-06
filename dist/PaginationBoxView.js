@@ -19,7 +19,11 @@ var PaginationBoxView = React.createClass({
     forceSelected: React.PropTypes.number,
     containerClassName: React.PropTypes.string,
     subContainerClassName: React.PropTypes.string,
-    activeClass: React.PropTypes.string
+    prevClassName: React.PropTypes.string,
+    nextClassName: React.PropTypes.string,
+    linkContainerClassName: React.PropTypes.string,
+    activeClass: React.PropTypes.string,
+    link: React.PropTypes.func
   },
 
   getDefaultProps: function getDefaultProps() {
@@ -42,9 +46,9 @@ var PaginationBoxView = React.createClass({
   handlePageSelected: function handlePageSelected(selected, event) {
     event.preventDefault();
 
-    if (this.state.selected === selected) {
-      return;
-    }this.setState({ selected: selected });
+    if (this.state.selected === selected) return;
+
+    this.setState({ selected: selected });
 
     if (typeof this.props.clickCallback !== 'undefined' && typeof this.props.clickCallback === 'function') {
       this.props.clickCallback({ selected: selected });
@@ -66,14 +70,14 @@ var PaginationBoxView = React.createClass({
   },
 
   render: function render() {
-    var previousClasses = classNames({
-      previous: true,
-      disabled: this.state.selected === 0
+    var previousClasses = classNames(this.props.prevClassName, {
+      'm-previous': true,
+      'm-disabled': this.state.selected === 0
     });
 
-    var nextClasses = classNames({
-      next: true,
-      disabled: this.state.selected === this.props.pageNum - 1
+    var nextClasses = classNames(this.props.nextClassName, {
+      'm-next': true,
+      'm-disabled': this.state.selected === this.props.pageNum - 1
     });
 
     return React.createElement(
@@ -96,7 +100,9 @@ var PaginationBoxView = React.createClass({
         marginPagesDisplayed: this.props.marginPagesDisplayed,
         breakLabel: this.props.breakLabel,
         subContainerClassName: this.props.subContainerClassName,
-        activeClass: this.props.activeClass }),
+        linkContainerClassName: this.props.linkContainerClassName,
+        activeClass: this.props.activeClass,
+        link: this.props.link }),
       React.createElement(
         'li',
         { onClick: this.handleNextPage, className: nextClasses },

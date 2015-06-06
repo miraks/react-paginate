@@ -7,18 +7,22 @@ var PaginationListView = require('./PaginationListView');
 var PaginationBoxView = React.createClass({
 
   propTypes: {
-    pageNum               : React.PropTypes.number.isRequired,
-    pageRangeDisplayed    : React.PropTypes.number.isRequired,
-    marginPagesDisplayed  : React.PropTypes.number.isRequired,
-    previousLabel         : React.PropTypes.node,
-    nextLabel             : React.PropTypes.node,
-    breakLabel            : React.PropTypes.node,
-    clickCallback         : React.PropTypes.func,
-    initialSelected       : React.PropTypes.number,
-    forceSelected         : React.PropTypes.number,
-    containerClassName    : React.PropTypes.string,
-    subContainerClassName : React.PropTypes.string,
-    activeClass           : React.PropTypes.string
+    pageNum                : React.PropTypes.number.isRequired,
+    pageRangeDisplayed     : React.PropTypes.number.isRequired,
+    marginPagesDisplayed   : React.PropTypes.number.isRequired,
+    previousLabel          : React.PropTypes.node,
+    nextLabel              : React.PropTypes.node,
+    breakLabel             : React.PropTypes.node,
+    clickCallback          : React.PropTypes.func,
+    initialSelected        : React.PropTypes.number,
+    forceSelected          : React.PropTypes.number,
+    containerClassName     : React.PropTypes.string,
+    subContainerClassName  : React.PropTypes.string,
+    prevClassName          : React.PropTypes.string,
+    nextClassName          : React.PropTypes.string,
+    linkContainerClassName : React.PropTypes.string,
+    activeClass            : React.PropTypes.string,
+    link                   : React.PropTypes.func
   },
 
   getDefaultProps: function() {
@@ -66,12 +70,12 @@ var PaginationBoxView = React.createClass({
   },
 
   render: function() {
-    var previousClasses = classNames({
+    var previousClasses = classNames(this.props.prevClassName, {
       'm-previous': true,
       'm-disabled': this.state.selected === 0
     });
 
-    var nextClasses = classNames({
+    var nextClasses = classNames(this.props.nextClassName, {
       'm-next': true,
       'm-disabled': this.state.selected === this.props.pageNum - 1
     });
@@ -90,7 +94,9 @@ var PaginationBoxView = React.createClass({
           marginPagesDisplayed={this.props.marginPagesDisplayed}
           breakLabel={this.props.breakLabel}
           subContainerClassName={this.props.subContainerClassName}
-          activeClass={this.props.activeClass} />
+          linkContainerClassName={this.props.linkContainerClassName}
+          activeClass={this.props.activeClass}
+          link={this.props.link} />
 
         <li onClick={this.handleNextPage} className={nextClasses}>
           <a href="">{this.props.nextLabel}</a>

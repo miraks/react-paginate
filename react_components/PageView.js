@@ -1,16 +1,23 @@
 'use strict';
 
 var React = require('react');
+var classNames = require('classnames');
 
 var PageView = React.createClass({
   render: function() {
-    if (this.props.selected) {
-      var cssClass = this.props.activeClass || 'selected';
-    }
+    var classes = {};
+    classes[this.props.linkContainerClassName] = true;
+    classes[this.props.activeClass || 'm-selected'] = this.props.selected;
+    var linkContainerClasses = classNames(classes);
+
+    var Link = this.props.link || 'a';
+
     return (
-        <li className={cssClass}>
-            <a {...this.props} href="">{this.props.page}</a>
-        </li>
+      <li className={linkContainerClasses}>
+        <Link {...this.props} href="">
+          {this.props.page}
+        </Link>
+      </li>
     );
   }
 });
