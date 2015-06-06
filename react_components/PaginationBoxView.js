@@ -67,13 +67,13 @@ var PaginationBoxView = React.createClass({
 
   render: function() {
     var previousClasses = classNames({
-      'previous': true,
-      'disabled': this.state.selected === 0
+      'm-previous': true,
+      'm-disabled': this.state.selected === 0
     });
 
     var nextClasses = classNames({
-      'next': true,
-      'disabled': this.state.selected === this.props.pageNum - 1
+      'm-next': true,
+      'm-disabled': this.state.selected === this.props.pageNum - 1
     });
 
     return (
